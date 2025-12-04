@@ -83,6 +83,26 @@ export class ChunkTransformer {
         })
         break;
       }
+
+// --- 新增: 处理 replace 类型的图片消息 ---
+      case 'replace': {
+        const chunkData = chunk as YuanBao.CompletionChunkReplace
+        const medias = chunkData.replace?.multimedias || []
+        
+        // 筛选出 mediaType 为 image 且有 url 的项目
+        const images = medias
+          .filter(m => m.mediaType === 'image' && m.url)
+          .map(m => `![image](${m.url})`)
+          .join('\n')
+
+        if (images) {
+          this.send({
+            content: `\n${images}\n`
+          })
+        }
+        break
+      }
+      // --- 新增结束 ---
       case 'dividerLine': {
         const chunkData = chunk as YuanBao.CompletionChunkDivider
         this.send({
