@@ -165,7 +165,22 @@ export declare namespace YuanBao {
       templateId: string;
     };
   }
-
+// --- 新增: 定义 Replace 类型结构 ---
+  type CompletionChunkReplace = {
+    type: 'replace'
+    replace: {
+      id: string
+      display: string
+      multimedias: {
+        type: string
+        mediaType: string
+        url: string
+        previewUrl?: string
+        desc?: string
+      }[]
+    }
+  }
+  
   type CompletionChunkText = {
     type: 'text'
     msg: string
@@ -257,7 +272,7 @@ export declare namespace YuanBao {
     dividerText: string
   }
 
-  type CompletionChunk = CompletionChunkSearch | CompletionChunkStep | CompletionChunkText | CompletionChunkThink | CompletionChunkMeta | CompletionChunkComponent | CompletionChunkOutline | CompletionChunkMindmap | CompletionChunkTimeline | CompletionChunkRelevantEntities | CompletionChunkDivider
+  type CompletionChunk = CompletionChunkSearch | CompletionChunkStep | CompletionChunkText | CompletionChunkThink | CompletionChunkMeta | CompletionChunkComponent | CompletionChunkOutline | CompletionChunkMindmap | CompletionChunkTimeline | CompletionChunkRelevantEntities | CompletionChunkDivider | CompletionChunkReplace
 
   interface SearchResult {
     index: number;
